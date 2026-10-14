@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Compra">
+<meta name="theme-color" content="#17A058">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<title>Compra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F2F5EF;--card:#FFFFFF;--ink:#13261B;--mute:#6B7A70;--line:#E1E8DE;--g:#17A058;--gt:#DDF3E4;--warn:#E8503A;--sh:0 1px 2px rgba(19,38,27,.06),0 6px 18px rgba(19,38,27,.06);
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1A14;--card:#18271F;--ink:#E8F2EA;--mute:#8CA091;--line:#25382D;--gt:#17392A;--sh:none}}
+:root[data-theme="dark"]{--bg:#0F1A14;--card:#18271F;--ink:#E8F2EA;--mute:#8CA091;--line:#25382D;--gt:#17392A;--sh:none}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.4 "DM Sans",system-ui,sans-serif;min-height:100vh}
+.wrap{max-width:600px;margin:0 auto;padding:0 16px 120px}
+header{padding:20px 0 4px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+h1{font:800 34px/1 "Bricolage Grotesque",system-ui,sans-serif;margin:0;letter-spacing:-.02em}
+.sub{color:var(--mute);font-size:13px;margin-top:6px}
+.sync{flex:none;border:1px solid var(--line);background:var(--card);color:var(--mute);border-radius:999px;padding:6px 12px;font:500 12px "DM Sans",sans-serif;display:flex;align-items:center;gap:6px;cursor:pointer}
+.sync i{width:8px;height:8px;border-radius:50%;background:var(--mute)}
+.sync.ok i{background:var(--g)}.sync.off i{background:var(--warn)}
+.search{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding:10px 0 8px;display:flex;gap:8px}
+.search input,.search select{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:16px;padding:13px 14px;font:500 16px "DM Sans",sans-serif;outline:none;min-width:0}
+.search input{flex:1}.search select{flex:none;max-width:42%}
+.search input:focus,.search select:focus{border-color:var(--g);box-shadow:0 0 0 3px var(--gt)}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:4px 0 12px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:8px 14px;font:500 14px "DM Sans",sans-serif;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(min-width:520px){.grid{grid-template-columns:repeat(3,1fr)}}
+.p{position:relative;text-align:left;border:2px solid transparent;background:var(--card);color:var(--ink);border-radius:22px;padding:10px 10px 12px;box-shadow:var(--sh);cursor:pointer;font:inherit;display:flex;flex-direction:column;gap:4px}
+.p:focus-visible,.chip:focus-visible,.bar:focus-visible,.sync:focus-visible{outline:3px solid var(--g);outline-offset:2px}
+.tile{height:112px;border-radius:14px;background:#fff;display:grid;place-items:center;margin-bottom:6px;overflow:hidden}
+.tile img{width:100%;height:100%;object-fit:contain}
+.tile span{font-size:40px}
+.br{color:var(--g);font-weight:700;font-size:12px}
+.p b{font-weight:700;font-size:14px;line-height:1.2}
+.p small{color:var(--mute);font-size:12px}
+.pr{font:800 17px "Bricolage Grotesque",sans-serif;margin-top:auto;padding-top:4px}
+.pr em{font:400 11px "DM Sans",sans-serif;color:var(--mute);font-style:normal;margin-left:6px}
+.tick{position:absolute;top:16px;right:16px;width:30px;height:30px;border-radius:50%;background:#fff;border:2px solid var(--line);display:grid;place-items:center;color:#fff;font-weight:800;font-size:16px;transition:background .15s,border-color .15s}
+.p.on{border-color:var(--g);background:var(--gt)}
+.p.on .tick{background:var(--g);border-color:var(--g)}
+.p.pop .tick{animation:pop .28s ease-out}
+@keyframes pop{50%{transform:scale(1.3)}}
+.empty{grid-column:1/-1;text-align:center;color:var(--mute);padding:40px 0}
+#more{height:1px}
+.bar{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom,0px));width:min(568px,calc(100% - 32px));background:var(--ink);color:var(--bg);border:0;border-radius:20px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;font:700 16px "DM Sans",sans-serif;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,.25);z-index:10}
+.bar .n{background:var(--g);color:#fff;border-radius:999px;min-width:26px;padding:2px 9px;margin-right:10px;text-align:center;display:inline-block}
+.bar .t{font:800 18px "Bricolage Grotesque",sans-serif}
+.ov{position:fixed;inset:0;background:rgba(10,20,14,.5);opacity:0;pointer-events:none;transition:opacity .2s;z-index:20}
+.ov.open{opacity:1;pointer-events:auto}
+.sheet{position:fixed;left:50%;bottom:0;transform:translate(-50%,100%);width:min(600px,100%);max-height:88vh;background:var(--bg);border-radius:26px 26px 0 0;z-index:30;display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.2,.8,.2,1);padding-bottom:env(safe-area-inset-bottom,0px);visibility:hidden}
+.sheet.open{transform:translate(-50%,0);visibility:visible}
+.sh{display:flex;justify-content:space-between;align-items:center;padding:18px 20px 8px;gap:8px}
+.sh h2{font:800 24px "Bricolage Grotesque",sans-serif;margin:0;flex:1}
+.x{border:0;background:var(--card);color:var(--ink);width:36px;height:36px;border-radius:50%;font-size:18px;cursor:pointer}
+.list{overflow:auto;padding:4px 20px 12px}
+.cat{font:700 13px "DM Sans",sans-serif;color:var(--mute);margin:14px 0 6px}
+.row{display:flex;align-items:center;gap:10px;background:var(--card);border-radius:16px;padding:8px 10px;margin-bottom:8px}
+.ck{flex:none;width:28px;height:28px;border-radius:50%;border:2px solid var(--line);background:transparent;color:#fff;font-weight:800;cursor:pointer}
+.row.done .ck{background:var(--g);border-color:var(--g)}
+.row.done .nm{text-decoration:line-through;color:var(--mute)}
+.th{flex:none;width:46px;height:46px;border-radius:10px;background:#fff;display:grid;place-items:center;overflow:hidden}
+.th img{width:100%;height:100%;object-fit:contain}
+.nm{flex:1;font-weight:500;font-size:14px;line-height:1.2;min-width:0}
+.nm small{display:block;color:var(--mute);font-size:12px;margin-top:2px}
+.qty{display:flex;align-items:center;gap:6px}
+.qty button{width:30px;height:30px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:700 16px "DM Sans",sans-serif;cursor:pointer}
+.qty span{min-width:18px;text-align:center;font-weight:700}
+.foot{padding:12px 20px 16px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px}
+.tot{font:800 22px "Bricolage Grotesque",sans-serif}
+.tot small{display:block;font:400 12px "DM Sans",sans-serif;color:var(--mute)}
+.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:14px;padding:12px 16px;font:700 14px "DM Sans",sans-serif;cursor:pointer}
+.btn.pri{background:var(--g);border-color:var(--g);color:#fff}
+.jb{padding:8px 20px 20px;display:flex;flex-direction:column;gap:12px}
+.jb p{margin:0;color:var(--mute);font-size:14px}
+.jb .code{font:700 18px "DM Sans",sans-serif;color:var(--ink);background:var(--card);border-radius:14px;padding:12px 14px;word-break:break-all;user-select:all}
+.jrow{display:flex;gap:8px}
+.jrow input{flex:1;min-width:0;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:14px;padding:12px 14px;font:500 16px "DM Sans",sans-serif;outline:none}
+.toast{position:fixed;left:50%;top:calc(16px + env(safe-area-inset-top,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:999px;font-size:14px;z-index:50;opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.on{opacity:1}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div><h1>Compra</h1><div class="sub" id="sub">Cargando catálogo…</div></div>
+    <button class="sync" id="sync" aria-label="Lista compartida"><i></i><span id="syncT">Solo en este móvil</span></button>
+  </header>
+  <div class="search">
+    <input id="q" type="search" placeholder="Buscar en Mercadona" autocomplete="off" aria-label="Buscar productos">
+    <select id="marca" aria-label="Marca"><option value="">Todas las marcas</option></select>
+  </div>
+  <div class="chips" id="chips"></div>
+  <main class="grid" id="grid"></main>
+  <div id="more"></div>
+</div>
+
+<button class="bar" id="bar" aria-label="Abrir mi lista"><span><span class="n" id="cnt">0</span>Mi lista</span><span class="t" id="tot">0,00 €</span></button>
+<div class="ov" id="ov"></div>
+
+<section class="sheet" id="sheet" aria-label="Mi lista">
+  <div class="sh"><h2>Mi lista</h2><button class="btn" id="share">Compartir</button><button class="x" data-close aria-label="Cerrar">✕</button></div>
+  <div class="list" id="list"></div>
+  <div class="foot"><div class="tot" id="tot2"></div><button class="btn" id="clr">Quitar tachados</button></div>
+</section>
+
+<section class="sheet" id="join" aria-label="Lista compartida">
+  <div class="sh"><h2>Lista compartida</h2><button class="x" data-close aria-label="Cerrar">✕</button></div>
+  <div class="jb" id="jbody"></div>
+</section>
+
+<div class="toast" id="toast"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="config.js"></script>
+<script>
+const CFG=window.CONFIG||{};
+const $=id=>document.getElementById(id);
+const eur=n=>n.toFixed(2).replace(".",",")+" €";
+const norm=s=>(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const load=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k));return v??d}catch(e){return d}};
+const store=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+
+let CAT=null,byId={},view=[],shown=0,grupo=-1,marca="",term="";
+let items=load("items",{}),code=null,sb=null,chan=null,pending=0;
+const failed=new Set();
+const PAGE=48;
+
+// ---- código de lista (desde el enlace o guardado)
+const m=location.hash.match(/l=([\w-]{8,64})/);
+if(m){code=m[1];store("code",code);history.replaceState(null,"",location.pathname)}else code=load("code",null);
+
+// ---- utilidades de interfaz
+let tt;const toast=t=>{const e=$("toast");e.textContent=t;e.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>e.classList.remove("on"),2200)};
+const openSheet=id=>{document.querySelectorAll(".sheet").forEach(s=>s.classList.toggle("open",s.id===id));$("ov").classList.add("open")};
+const closeSheets=()=>{document.querySelectorAll(".sheet").forEach(s=>s.classList.remove("open"));$("ov").classList.remove("open")};
+function setSync(s){
+  const b=$("sync");b.className="sync "+(s==="local"?"":s);
+  $("syncT").textContent=s==="ok"?"Sincronizada":s==="off"?"Sin conexión":"Solo en este móvil";
+}
+
+// ---- catálogo
+function lab(p){return p.b&&!norm(p.n).includes(norm(p.b))?`<span class="br">${esc(p.b)}</span>`:""}
+function img(p,cls){return p.i?`<img src="${esc(p.i)}" alt="" loading="lazy" decoding="async">`:`<span>🛒</span>`}
+function card(p){const on=!!items[p.id];
+  return `<button class="p${on?" on":""}" data-id="${p.id}" aria-pressed="${on}"><span class="tick">${on?"✓":""}</span><div class="tile">${img(p)}</div>${lab(p)}<b>${esc(p.n)}</b><small>${esc(p.f)}</small><span class="pr">${eur(p.p)}<em>${esc(p.u)}</em></span></button>`}
+function filtrar(){
+  const w=norm(term).split(/\s+/).filter(Boolean);
+  view=CAT.productos.filter(p=>(grupo<0||p.g===grupo)&&(!marca||p.b===marca)&&(!w.length||w.every(x=>norm(p.n+" "+p.b).includes(x))));
+  shown=0;$("grid").innerHTML="";
+  if(!view.length){$("grid").innerHTML=`<div class="empty">No hay nada con ese nombre.<br>Prueba con otra palabra o quita filtros.</div>`;return}
+  more();
+}
+function more(){
+  if(shown>=view.length)return;
+  const part=view.slice(shown,shown+PAGE);shown+=part.length;
+  $("grid").insertAdjacentHTML("beforeend",part.map(card).join(""));
+}
+new IntersectionObserver(es=>{if(es[0].isIntersecting)more()},{rootMargin:"600px"}).observe($("more"));
+function syncCards(){document.querySelectorAll(".p").forEach(b=>{const on=!!items[b.dataset.id];b.classList.toggle("on",on);b.setAttribute("aria-pressed",on);b.querySelector(".tick").textContent=on?"✓":""})}
+
+// ---- lista
+function info(id){return byId[id]||{n:items[id].n||"Producto que ya no está en el catálogo",b:"",f:"",p:0,i:"",g:-1}}
+function totals(){
+  let n=0,t=0;
+  for(const id in items){n+=items[id].q;t+=items[id].q*info(id).p}
+  $("cnt").textContent=n;$("tot").textContent=eur(t);
+  $("tot2").innerHTML=`<small>Total estimado</small>${eur(t)}`;
+}
+function renderList(){
+  const ids=Object.keys(items);
+  if(!ids.length){$("list").innerHTML=`<div class="empty">Tu lista está vacía.<br>Toca un producto para añadirlo.</div>`;return}
+  const gs=[...new Set(ids.map(id=>info(id).g))].sort((a,b)=>a-b);
+  $("list").innerHTML=gs.map(g=>{
+    const r=ids.filter(id=>info(id).g===g);
+    return `<div class="cat">${esc(g<0?"Otros":CAT.grupos[g])}</div>`+r.map(id=>{const p=info(id),s=items[id];
+      return `<div class="row${s.d?" done":""}"><button class="ck" data-ck="${id}" aria-label="Marcar ${esc(p.n)}">${s.d?"✓":""}</button><div class="th">${img(p)}</div><div class="nm">${esc(p.n)}<small>${p.p?eur(p.p)+" · ":""}${esc(p.f)}</small></div><div class="qty"><button data-m="${id}" aria-label="Menos">−</button><span>${s.q}</span><button data-a="${id}" aria-label="Más">+</button></div></div>`}).join("");
+  }).join("");
+}
+function refresh(){totals();renderList();store("items",items)}
+
+// ---- sincronización (Supabase)
+async function push(id){
+  if(!sb||!code)return;
+  pending++;let err=null;
+  try{
+    const it=items[id];
+    const r=it?await sb.from("list_items").upsert({list_id:code,product_id:id,qty:it.q,done:it.d,name:it.n||null,updated_at:new Date().toISOString()})
+              :await sb.from("list_items").delete().eq("list_id",code).eq("product_id",id);
+    err=r.error;
+  }catch(e){err=e}
+  pending--;
+  if(err){failed.add(id);setSync("off");return}
+  setSync("ok");
+  if(!pending)pull();
+}
+async function pull(){
+  if(!sb||!code||pending)return;
+  if(failed.size){const ids=[...failed];failed.clear();await Promise.all(ids.map(push));return}
+  try{
+    const {data,error}=await sb.from("list_items").select("product_id,qty,done,name").eq("list_id",code);
+    if(error)throw error;
+    const n={};for(const r of data)n[r.product_id]={q:r.qty,d:r.done,n:r.name||""};
+    items=n;refresh();syncCards();setSync("ok");
+  }catch(e){setSync("off")}
+}
+function startSync(){
+  if(!sb||!code){setSync("local");return}
+  pull();
+  if(chan)sb.removeChannel(chan);
+  chan=sb.channel("lista").on("postgres_changes",{event:"*",schema:"public",table:"list_items"},()=>pull())
+    .subscribe(s=>{if(s==="SUBSCRIBED")setSync("ok");else if(["CHANNEL_ERROR","TIMED_OUT","CLOSED"].includes(s))setSync("off")});
+}
+const validCode=c=>/^[\w-]{8,64}$/.test(c);
+function useCode(c){
+  code=c;store("code",c);items={};refresh();syncCards();startSync();closeSheets();
+  toast("Lista conectada");
+}
+function showJoin(){
+  const hay=!!sb;
+  $("jbody").innerHTML=!hay?`<p>La sincronización aún no está configurada: faltan los datos de Supabase en config.js. Mientras tanto la lista se guarda solo en este móvil.</p>`
+  :code?`<p>Este es el código de vuestra lista. Quien lo introduzca verá los mismos productos al momento.</p><div class="code">${esc(code)}</div><button class="btn pri" id="jshare">Enviar enlace</button><p>¿Quieres cambiar a otra lista?</p><div class="jrow"><input id="jcode" placeholder="Código de otra lista" autocapitalize="off" autocomplete="off" autocorrect="off"><button class="btn" id="jgo">Unirme</button></div>`
+  :`<p>Crea una lista y mándale el código a tu pareja. Los dos veréis los mismos productos al momento.</p><button class="btn pri" id="jnew">Crear lista nueva</button><p>O únete a una que ya existe:</p><div class="jrow"><input id="jcode" placeholder="Código de la lista" autocapitalize="off" autocomplete="off" autocorrect="off"><button class="btn" id="jgo">Unirme</button></div>`;
+  openSheet("join");
+}
+$("jbody").addEventListener("click",e=>{
+  const id=e.target.id;
+  if(id==="jnew"){const a=new Uint8Array(12);crypto.getRandomValues(a);const c=[...a].map(x=>"abcdefghjkmnpqrstuvwxyz23456789"[x%31]).join("");
+    // los elementos de la lista local pasan a la nueva lista compartida
+    const prev=items;useCode(c);items=prev;refresh();Object.keys(items).forEach(push);showJoin()}
+  if(id==="jgo"){const c=$("jcode").value.trim();if(!validCode(c))return toast("Código no válido");useCode(c)}
+  if(id==="jshare")share();
+});
+async function share(){
+  if(!sb||!code){showJoin();return}
+  const url=location.origin+location.pathname+"#l="+code;
+  try{
+    if(navigator.share)await navigator.share({title:"Lista de la compra",text:"Código de la lista: "+code,url});
+    else{await navigator.clipboard.writeText(url);toast("Enlace copiado")}
+  }catch(e){}
+}
+
+// ---- eventos
+$("grid").addEventListener("click",e=>{
+  const b=e.target.closest(".p");if(!b)return;
+  const id=b.dataset.id;
+  if(items[id])delete items[id];else items[id]={q:1,d:false,n:byId[id].n};
+  const on=!!items[id];
+  b.classList.toggle("on",on);b.setAttribute("aria-pressed",on);b.querySelector(".tick").textContent=on?"✓":"";
+  b.classList.remove("pop");void b.offsetWidth;b.classList.add("pop");
+  if(navigator.vibrate)navigator.vibrate(8);
+  refresh();push(id);
+});
+$("list").addEventListener("click",e=>{
+  const t=e.target.closest("button");if(!t)return;const d=t.dataset;
+  const id=d.ck||d.a||d.m;if(!id)return;
+  if(d.ck)items[id].d=!items[id].d;
+  else if(d.a)items[id].q++;
+  else if(--items[id].q<1)delete items[id];
+  refresh();syncCards();push(id);
+});
+$("clr").onclick=()=>{const ids=Object.keys(items).filter(id=>items[id].d);ids.forEach(id=>delete items[id]);refresh();syncCards();ids.forEach(push)};
+$("chips").addEventListener("click",e=>{const b=e.target.closest(".chip");if(!b)return;grupo=+b.dataset.g;chips();filtrar()});
+$("q").addEventListener("input",e=>{term=e.target.value;filtrar()});
+$("marca").addEventListener("change",e=>{marca=e.target.value;filtrar()});
+$("bar").onclick=()=>openSheet("sheet");
+$("ov").onclick=closeSheets;
+document.querySelectorAll("[data-close]").forEach(b=>b.onclick=closeSheets);
+$("share").onclick=share;
+$("sync").onclick=showJoin;
+addEventListener("online",pull);
+document.addEventListener("visibilitychange",()=>{if(!document.hidden)pull()});
+
+function chips(){
+  $("chips").innerHTML=["Todo",...CAT.grupos].map((c,i)=>`<button class="chip" data-g="${i-1}" aria-pressed="${grupo===i-1}">${esc(c)}</button>`).join("");
+}
+
+// ---- arranque
+if(CFG.SUPABASE_URL&&CFG.SUPABASE_KEY&&window.supabase){sb=supabase.createClient(CFG.SUPABASE_URL,CFG.SUPABASE_KEY)}
+if("serviceWorker"in navigator)navigator.serviceWorker.register("sw.js").catch(()=>{});
+refresh();
+fetch("catalogo.json").then(r=>{if(!r.ok)throw 0;return r.json()}).then(d=>{
+  CAT=d;for(const p of d.productos)byId[p.id]=p;
+  const cuenta={};for(const p of d.productos)if(p.b)cuenta[p.b]=(cuenta[p.b]||0)+1;
+  const ms=Object.keys(cuenta).sort((a,b)=>(b==="Hacendado")-(a==="Hacendado")||cuenta[b]-cuenta[a]||a.localeCompare(b,"es"));
+  $("marca").innerHTML=`<option value="">Todas las marcas</option>`+ms.map(x=>`<option value="${esc(x)}">${esc(x)} (${cuenta[x]})</option>`).join("");
+  const f=d.actualizado?new Date(d.actualizado+"T12:00:00").toLocaleDateString("es-ES",{day:"numeric",month:"short"}):"";
+  $("sub").textContent=`${f?"Catálogo del "+f+" · ":""}Mercadona Sevilla · ${d.productos.length.toLocaleString("es-ES")} productos`;
+  chips();filtrar();refresh();syncCards();startSync();
+  if(!code&&sb&&!load("sinLista",false)){store("sinLista",true);showJoin()}
+}).catch(()=>{$("sub").textContent="No se pudo cargar el catálogo";$("grid").innerHTML=`<div class="empty">Falta catalogo.json.<br>Lanza la acción "Actualizar catálogo" en GitHub.</div>`});
+</script>
+</body>
+</html>
