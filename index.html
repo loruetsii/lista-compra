@@ -13,78 +13,126 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#F2F5EF;--card:#FFFFFF;--ink:#13261B;--mute:#6B7A70;--line:#E1E8DE;--g:#17A058;--gt:#DDF3E4;--warn:#E8503A;--sh:0 1px 2px rgba(19,38,27,.06),0 6px 18px rgba(19,38,27,.06);
+:root{--bg:#F3F5F0;--card:#FFFFFF;--ink:#0F1C14;--mute:#66756B;--line:#E3E9E0;--g:#12A454;--gt:#DCF4E4;--warn:#E5533D;--glass:rgba(255,255,255,.8);--sh:0 2px 4px rgba(15,28,20,.04),0 10px 28px rgba(15,28,20,.07);--ts:78%;--tl:90%;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1A14;--card:#18271F;--ink:#E8F2EA;--mute:#8CA091;--line:#25382D;--gt:#17392A;--sh:none}}
-:root[data-theme="dark"]{--bg:#0F1A14;--card:#18271F;--ink:#E8F2EA;--mute:#8CA091;--line:#25382D;--gt:#17392A;--sh:none}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0C1510;--card:#16241C;--ink:#EAF3EC;--mute:#8DA195;--line:#233429;--gt:#173A28;--glass:rgba(22,36,28,.8);--sh:none;--ts:32%;--tl:21%}}
+:root[data-theme="dark"]{--bg:#0C1510;--card:#16241C;--ink:#EAF3EC;--mute:#8DA195;--line:#233429;--gt:#173A28;--glass:rgba(22,36,28,.8);--sh:none;--ts:32%;--tl:21%}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+[hidden]{display:none!important}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.4 "DM Sans",system-ui,sans-serif;min-height:100vh}
-.wrap{max-width:600px;margin:0 auto;padding:0 16px 120px}
-header{padding:20px 0 4px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
-h1{font:800 34px/1 "Bricolage Grotesque",system-ui,sans-serif;margin:0;letter-spacing:-.02em}
+button{font-family:inherit}
+.wrap{max-width:600px;margin:0 auto;padding:0 16px 150px}
+header{padding:22px 0 6px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+h1{font:800 36px/1 "Bricolage Grotesque",system-ui,sans-serif;margin:0;letter-spacing:-.025em}
 .sub{color:var(--mute);font-size:13px;margin-top:6px}
-.sync{flex:none;border:1px solid var(--line);background:var(--card);color:var(--mute);border-radius:999px;padding:6px 12px;font:500 12px "DM Sans",sans-serif;display:flex;align-items:center;gap:6px;cursor:pointer}
+.sync{flex:none;border:1px solid var(--line);background:var(--card);color:var(--mute);border-radius:999px;padding:6px 12px;font:500 12px "DM Sans",sans-serif;display:flex;align-items:center;gap:6px;cursor:pointer;margin-top:4px}
 .sync i{width:8px;height:8px;border-radius:50%;background:var(--mute)}
 .sync.ok i{background:var(--g)}.sync.off i{background:var(--warn)}
+:focus-visible{outline:3px solid var(--g);outline-offset:2px}
 .search{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding:10px 0 8px;display:flex;gap:8px}
-.search input,.search select{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:16px;padding:13px 14px;font:500 16px "DM Sans",sans-serif;outline:none;min-width:0}
-.search input{flex:1}.search select{flex:none;max-width:42%}
-.search input:focus,.search select:focus{border-color:var(--g);box-shadow:0 0 0 3px var(--gt)}
-.chips{display:flex;gap:8px;overflow-x:auto;padding:4px 0 12px;scrollbar-width:none}
-.chips::-webkit-scrollbar{display:none}
-.chip{flex:none;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:8px 14px;font:500 14px "DM Sans",sans-serif;cursor:pointer}
-.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.search input,.search select{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:18px;padding:14px 16px;font:500 16px "DM Sans",sans-serif;outline:none;min-width:0;box-shadow:var(--sh)}
+.search input{flex:1}.search select{flex:none;max-width:40%}
+.search input:focus,.search select:focus{border-color:var(--g)}
+.adding{width:100%;display:flex;justify-content:space-between;align-items:center;gap:10px;border:0;background:var(--gt);color:var(--ink);border-radius:16px;padding:11px 14px;font:500 14px "DM Sans",sans-serif;cursor:pointer;margin:2px 0 6px;text-align:left}
+.adding .c{background:var(--g);color:#fff;border-radius:999px;padding:1px 9px;font-weight:700}
+.h2{font:800 21px "Bricolage Grotesque",sans-serif;margin:18px 2px 10px;letter-spacing:-.01em}
+.cats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.cat{aspect-ratio:1.25;border:0;border-radius:28px;background:hsl(var(--h) var(--ts) var(--tl));color:var(--ink);padding:14px 16px;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;text-align:left;cursor:pointer;transition:transform .12s}
+.cat:active{transform:scale(.97)}
+.cat .ti{font-size:42px;line-height:1}
+.cat b{font:800 16px/1.15 "Bricolage Grotesque",sans-serif}
+.cat small{display:block;font:500 12px "DM Sans",system-ui,sans-serif;opacity:.65;margin-top:3px}
+.rhead{display:flex;align-items:center;gap:10px;margin:8px 0 12px}
+.rhead h2{font:800 22px/1.15 "Bricolage Grotesque",sans-serif;margin:0}
+.back{flex:none;width:40px;height:40px;border-radius:50%;border:0;background:var(--card);color:var(--ink);font-size:24px;line-height:1;cursor:pointer;box-shadow:var(--sh)}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
 @media(min-width:520px){.grid{grid-template-columns:repeat(3,1fr)}}
-.p{position:relative;text-align:left;border:2px solid transparent;background:var(--card);color:var(--ink);border-radius:22px;padding:10px 10px 12px;box-shadow:var(--sh);cursor:pointer;font:inherit;display:flex;flex-direction:column;gap:4px}
-.p:focus-visible,.chip:focus-visible,.bar:focus-visible,.sync:focus-visible{outline:3px solid var(--g);outline-offset:2px}
-.tile{height:112px;border-radius:14px;background:#fff;display:grid;place-items:center;margin-bottom:6px;overflow:hidden}
-.tile img{width:100%;height:100%;object-fit:contain}
-.tile span{font-size:40px}
+.p{position:relative;text-align:left;border:2px solid transparent;background:var(--card);color:var(--ink);border-radius:24px;padding:10px 10px 12px;box-shadow:var(--sh);cursor:pointer;font:inherit;display:flex;flex-direction:column;gap:4px;transition:transform .12s}
+.p:active{transform:scale(.97)}
+.im{height:112px;border-radius:16px;background:#fff;display:grid;place-items:center;overflow:hidden;margin-bottom:6px}
+.im img{width:100%;height:100%;object-fit:contain}
+.im span{font-size:40px}
 .br{color:var(--g);font-weight:700;font-size:12px}
 .p b{font-weight:700;font-size:14px;line-height:1.2}
 .p small{color:var(--mute);font-size:12px}
-.pr{font:800 17px "Bricolage Grotesque",sans-serif;margin-top:auto;padding-top:4px}
+.pr{font:800 18px "Bricolage Grotesque",sans-serif;margin-top:auto;padding-top:4px}
 .pr em{font:400 11px "DM Sans",sans-serif;color:var(--mute);font-style:normal;margin-left:6px}
 .tick{position:absolute;top:16px;right:16px;width:30px;height:30px;border-radius:50%;background:#fff;border:2px solid var(--line);display:grid;place-items:center;color:#fff;font-weight:800;font-size:16px;transition:background .15s,border-color .15s}
-.p.on{border-color:var(--g);background:var(--gt)}
-.p.on .tick{background:var(--g);border-color:var(--g)}
-.p.pop .tick{animation:pop .28s ease-out}
+.on{border-color:var(--g)!important;background:var(--gt)!important}
+.on .tick{background:var(--g);border-color:var(--g)}
+.pop .tick{animation:pop .28s ease-out}
 @keyframes pop{50%{transform:scale(1.3)}}
-.empty{grid-column:1/-1;text-align:center;color:var(--mute);padding:40px 0}
+.minis{display:flex;gap:10px;overflow-x:auto;padding:2px 2px 10px;scrollbar-width:none}
+.minis::-webkit-scrollbar{display:none}
+.mini{position:relative;flex:none;width:98px;border:2px solid var(--line);background:var(--card);border-radius:22px;padding:8px;text-align:center;font:500 12px/1.2 "DM Sans",sans-serif;color:var(--ink);cursor:pointer}
+.mini .im{height:66px;margin-bottom:6px}
+.mini .nn{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.mini .tick{top:12px;right:12px;width:22px;height:22px;font-size:12px}
+.empty{text-align:center;color:var(--mute);padding:36px 12px}
+.empty .big{font-size:52px;margin-bottom:8px}
+.empty b{display:block;color:var(--ink);font:800 20px "Bricolage Grotesque",sans-serif;margin-bottom:6px}
+.empty p{margin:0 0 16px}
+.acts{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
 #more{height:1px}
-.bar{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom,0px));width:min(568px,calc(100% - 32px));background:var(--ink);color:var(--bg);border:0;border-radius:20px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;font:700 16px "DM Sans",sans-serif;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,.25);z-index:10}
-.bar .n{background:var(--g);color:#fff;border-radius:999px;min-width:26px;padding:2px 9px;margin-right:10px;text-align:center;display:inline-block}
-.bar .t{font:800 18px "Bricolage Grotesque",sans-serif}
+.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:16px;padding:13px 18px;font:700 14px "DM Sans",sans-serif;cursor:pointer}
+.btn.pri{background:var(--g);border-color:var(--g);color:#fff}
+.btn.ghost{background:transparent;color:var(--mute)}
+.btn.wide{width:100%}
+.btn.big{width:100%;padding:17px;font-size:17px;border-radius:22px;box-shadow:0 10px 28px rgba(18,164,84,.35)}
+.prog{background:var(--card);border-radius:24px;padding:16px;box-shadow:var(--sh);margin:6px 0 4px}
+.pt{display:flex;align-items:baseline;gap:8px;margin-bottom:10px}
+.pt b{font:800 24px "Bricolage Grotesque",sans-serif}
+.pt span{color:var(--mute);font-size:14px}
+.pt em{margin-left:auto;font:800 18px "Bricolage Grotesque",sans-serif;font-style:normal}
+.bar{height:10px;border-radius:999px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--g);border-radius:999px;transition:width .3s}
+.gh{display:flex;align-items:center;gap:8px;margin:20px 2px 8px;font:800 17px "Bricolage Grotesque",sans-serif}
+.gh span{font-size:22px}
+.gh em{margin-left:auto;font:500 12px "DM Sans",sans-serif;color:var(--mute);font-style:normal}
+.row{display:flex;align-items:center;gap:12px;background:var(--card);border-radius:22px;padding:10px 12px;margin-bottom:8px;box-shadow:var(--sh);cursor:pointer;min-height:70px;user-select:none;-webkit-user-select:none}
+.ck{flex:none;width:32px;height:32px;border-radius:50%;border:2.5px solid var(--line);display:grid;place-items:center;color:#fff;font-weight:800}
+.row.done{opacity:.55}
+.row.done .ck{background:var(--g);border-color:var(--g)}
+.row.done .nm b{text-decoration:line-through}
+.th{flex:none;width:50px;height:50px;border-radius:12px;background:#fff;display:grid;place-items:center;overflow:hidden}
+.th img{width:100%;height:100%;object-fit:contain}
+.nm{flex:1;min-width:0;line-height:1.2}
+.nm b{font-weight:700;font-size:15px;display:block}
+.nm small{display:block;color:var(--mute);font-size:12px;margin-top:3px}
+.qty{display:flex;align-items:center;gap:4px}
+.qty button{width:34px;height:34px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:700 18px "DM Sans",sans-serif;cursor:pointer}
+.qty span{min-width:20px;text-align:center;font-weight:700}
+.cta{position:sticky;bottom:calc(96px + env(safe-area-inset-bottom,0px));padding-top:12px;z-index:4}
+.trip{background:var(--card);border-radius:24px;box-shadow:var(--sh);margin-top:12px;overflow:hidden}
+.trh{width:100%;display:flex;justify-content:space-between;align-items:center;gap:10px;border:0;background:transparent;color:var(--ink);padding:16px;text-align:left;cursor:pointer}
+.trh b{font:800 17px "Bricolage Grotesque",sans-serif;display:block}
+.trh small{color:var(--mute);font-size:13px}
+.st{flex:none;border-radius:999px;padding:4px 11px;font:700 12px "DM Sans",sans-serif}
+.st.open{background:var(--gt);color:var(--g)}
+.st.done{background:var(--line);color:var(--mute)}
+.tbody{padding:0 16px 16px}
+.ir{display:flex;gap:10px;align-items:center;padding:8px 0;border-top:1px solid var(--line);font-size:14px}
+.ir .y{color:var(--g);font-weight:800;width:16px}
+.ir .n{flex:1;min-width:0}
+.ir .q{color:var(--mute)}
+.ir .pz{font-weight:700}
+.tacts{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.tabs{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(12px + env(safe-area-inset-bottom,0px));width:min(420px,calc(100% - 24px));display:flex;gap:4px;padding:6px;background:var(--glass);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);border:1px solid var(--line);border-radius:28px;box-shadow:0 12px 36px rgba(0,0,0,.18);z-index:10}
+.tabs button{position:relative;flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:9px 4px 8px;border:0;background:transparent;color:var(--mute);border-radius:22px;font:600 11px "DM Sans",sans-serif;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--ink);color:var(--bg)}
+.tabs svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.badge{position:absolute;top:3px;left:calc(50% + 6px);background:var(--g);color:#fff;border-radius:999px;font-size:10px;font-weight:700;min-width:18px;padding:1px 5px;text-align:center}
 .ov{position:fixed;inset:0;background:rgba(10,20,14,.5);opacity:0;pointer-events:none;transition:opacity .2s;z-index:20}
 .ov.open{opacity:1;pointer-events:auto}
-.sheet{position:fixed;left:50%;bottom:0;transform:translate(-50%,100%);width:min(600px,100%);max-height:88vh;background:var(--bg);border-radius:26px 26px 0 0;z-index:30;display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.2,.8,.2,1);padding-bottom:env(safe-area-inset-bottom,0px);visibility:hidden}
+.sheet{position:fixed;left:50%;bottom:0;transform:translate(-50%,100%);width:min(600px,100%);max-height:88vh;background:var(--bg);border-radius:28px 28px 0 0;z-index:30;display:flex;flex-direction:column;transition:transform .3s cubic-bezier(.2,.8,.2,1);padding-bottom:env(safe-area-inset-bottom,0px);visibility:hidden}
 .sheet.open{transform:translate(-50%,0);visibility:visible}
 .sh{display:flex;justify-content:space-between;align-items:center;padding:18px 20px 8px;gap:8px}
 .sh h2{font:800 24px "Bricolage Grotesque",sans-serif;margin:0;flex:1}
 .x{border:0;background:var(--card);color:var(--ink);width:36px;height:36px;border-radius:50%;font-size:18px;cursor:pointer}
-.list{overflow:auto;padding:4px 20px 12px}
-.cat{font:700 13px "DM Sans",sans-serif;color:var(--mute);margin:14px 0 6px}
-.row{display:flex;align-items:center;gap:10px;background:var(--card);border-radius:16px;padding:8px 10px;margin-bottom:8px}
-.ck{flex:none;width:28px;height:28px;border-radius:50%;border:2px solid var(--line);background:transparent;color:#fff;font-weight:800;cursor:pointer}
-.row.done .ck{background:var(--g);border-color:var(--g)}
-.row.done .nm{text-decoration:line-through;color:var(--mute)}
-.th{flex:none;width:46px;height:46px;border-radius:10px;background:#fff;display:grid;place-items:center;overflow:hidden}
-.th img{width:100%;height:100%;object-fit:contain}
-.nm{flex:1;font-weight:500;font-size:14px;line-height:1.2;min-width:0}
-.nm small{display:block;color:var(--mute);font-size:12px;margin-top:2px}
-.qty{display:flex;align-items:center;gap:6px}
-.qty button{width:30px;height:30px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:700 16px "DM Sans",sans-serif;cursor:pointer}
-.qty span{min-width:18px;text-align:center;font-weight:700}
-.foot{padding:12px 20px 16px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px}
-.tot{font:800 22px "Bricolage Grotesque",sans-serif}
-.tot small{display:block;font:400 12px "DM Sans",sans-serif;color:var(--mute)}
-.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:14px;padding:12px 16px;font:700 14px "DM Sans",sans-serif;cursor:pointer}
-.btn.pri{background:var(--g);border-color:var(--g);color:#fff}
-.jb{padding:8px 20px 20px;display:flex;flex-direction:column;gap:12px}
+.jb{padding:8px 20px 22px;display:flex;flex-direction:column;gap:12px}
 .jb p{margin:0;color:var(--mute);font-size:14px}
-.jb .code{font:700 18px "DM Sans",sans-serif;color:var(--ink);background:var(--card);border-radius:14px;padding:12px 14px;word-break:break-all;user-select:all}
+.jb .code{font:700 18px "DM Sans",sans-serif;background:var(--card);border-radius:14px;padding:12px 14px;word-break:break-all;user-select:all}
 .jrow{display:flex;gap:8px}
 .jrow input{flex:1;min-width:0;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:14px;padding:12px 14px;font:500 16px "DM Sans",sans-serif;outline:none}
 .toast{position:fixed;left:50%;top:calc(16px + env(safe-area-inset-top,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:999px;font-size:14px;z-index:50;opacity:0;pointer-events:none;transition:opacity .2s}
@@ -95,72 +143,247 @@ h1{font:800 34px/1 "Bricolage Grotesque",system-ui,sans-serif;margin:0;letter-sp
 <body>
 <div class="wrap">
   <header>
-    <div><h1>Compra</h1><div class="sub" id="sub">Cargando catálogo…</div></div>
+    <div><h1 id="title">Compra</h1><div class="sub" id="sub">Cargando catálogo…</div></div>
     <button class="sync" id="sync" aria-label="Lista compartida"><i></i><span id="syncT">Solo en este móvil</span></button>
   </header>
-  <div class="search">
-    <input id="q" type="search" placeholder="Buscar en Mercadona" autocomplete="off" aria-label="Buscar productos">
-    <select id="marca" aria-label="Marca"><option value="">Todas las marcas</option></select>
-  </div>
-  <div class="chips" id="chips"></div>
-  <main class="grid" id="grid"></main>
-  <div id="more"></div>
+
+  <section id="v-prod">
+    <div class="search">
+      <input id="q" type="search" placeholder="Buscar en Mercadona" autocomplete="off" aria-label="Buscar productos">
+      <select id="marca" aria-label="Marca"><option value="">Marcas</option></select>
+    </div>
+    <button class="adding" id="adding"></button>
+    <div id="landing">
+      <div id="lastWrap" hidden><h2 class="h2">Lo de la última compra</h2><div class="minis" id="minis"></div></div>
+      <h2 class="h2">Secciones</h2>
+      <div class="cats" id="cats"></div>
+    </div>
+    <div id="results" hidden>
+      <div class="rhead"><button class="back" id="back" aria-label="Volver a las secciones">‹</button><h2 id="rtitle"></h2></div>
+      <div class="grid" id="grid"></div>
+      <div id="more"></div>
+    </div>
+  </section>
+
+  <section id="v-list" hidden>
+    <div id="listTop"></div>
+    <div id="listBody"></div>
+    <div class="cta" id="cta"></div>
+  </section>
+
+  <section id="v-hist" hidden>
+    <button class="btn pri wide" id="newTrip">＋ Nueva lista</button>
+    <div id="trips"></div>
+  </section>
 </div>
 
-<button class="bar" id="bar" aria-label="Abrir mi lista"><span><span class="n" id="cnt">0</span>Mi lista</span><span class="t" id="tot">0,00 €</span></button>
+<nav class="tabs" aria-label="Secciones de la app">
+  <button data-tab="prod" aria-selected="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg>Productos</button>
+  <button data-tab="list" aria-selected="false"><svg viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M3.5 6l1.5 1.5L7.5 5M3.5 12l1.5 1.5L7.5 11M3.5 18l1.5 1.5L7.5 17"/></svg>Lista<span class="badge" id="badge" hidden>0</span></button>
+  <button data-tab="hist" aria-selected="false"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Listas</button>
+</nav>
+
 <div class="ov" id="ov"></div>
-
-<section class="sheet" id="sheet" aria-label="Mi lista">
-  <div class="sh"><h2>Mi lista</h2><button class="btn" id="share">Compartir</button><button class="x" data-close aria-label="Cerrar">✕</button></div>
-  <div class="list" id="list"></div>
-  <div class="foot"><div class="tot" id="tot2"></div><button class="btn" id="clr">Quitar tachados</button></div>
-</section>
-
 <section class="sheet" id="join" aria-label="Lista compartida">
-  <div class="sh"><h2>Lista compartida</h2><button class="x" data-close aria-label="Cerrar">✕</button></div>
+  <div class="sh"><h2>Lista compartida</h2><button class="x" id="jx" aria-label="Cerrar">✕</button></div>
   <div class="jb" id="jbody"></div>
 </section>
-
 <div class="toast" id="toast"></div>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 <script src="config.js"></script>
 <script>
 const CFG=window.CONFIG||{};
 const $=id=>document.getElementById(id);
-const eur=n=>n.toFixed(2).replace(".",",")+" €";
+const eur=n=>(Number(n)||0).toFixed(2).replace(".",",")+" €";
 const norm=s=>(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const load=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k));return v??d}catch(e){return d}};
 const store=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+const uid=()=>{const a=new Uint8Array(8);crypto.getRandomValues(a);return [...a].map(x=>"abcdefghjkmnpqrstuvwxyz23456789"[x%31]).join("")};
+const fecha=d=>new Date(d).toLocaleDateString("es-ES",{day:"numeric",month:"short"});
+const EMO=[[/cabello|pelo/,"💇"],[/aceite|especia|salsa/,"🫒"],[/agua|refresc/,"🥤"],[/aperitiv/,"🥨"],[/arroz|legumbre|pasta/,"🍝"],[/azucar|caramelo|chocolate/,"🍫"],[/bebe/,"🍼"],[/bodega|vino|cerveza/,"🍷"],[/cacao|cafe|infusion/,"☕"],[/carne/,"🥩"],[/cereal|galleta/,"🥣"],[/charcuter|queso/,"🧀"],[/congelad/,"🧊"],[/conserva|caldo/,"🥫"],[/facial|corporal|higiene/,"🧴"],[/fitoterap|parafarm/,"💊"],[/fruta|verdura/,"🥦"],[/huevo|leche|mantequilla/,"🥛"],[/limpieza|hogar/,"🧽"],[/maquillaje/,"💄"],[/marisco|pescado/,"🐟"],[/mascota/,"🐶"],[/panader|pasteler/,"🥐"],[/pizza|plato/,"🍕"],[/postre|yogur/,"🍮"],[/zumo/,"🧃"]];
+const emo=n=>{const k=norm(n);for(const [r,e] of EMO)if(r.test(k))return e;return "🛒"};
+const hue=n=>{let h=0;for(const c of n)h=(h*31+c.charCodeAt(0))%360;return h};
 
-let CAT=null,byId={},view=[],shown=0,grupo=-1,marca="",term="";
-let items=load("items",{}),code=null,sb=null,chan=null,pending=0;
-const failed=new Set();
+let CAT={grupos:[],productos:[]},byId={},view=[],shown=0,grupo=-1,marca="",term="",tab="prod";
+let trips=load("trips",[]),tripItems=load("ti",{}),active=load("active",null);
+let queue=new Set(load("q",[])),code=null,sb=null,chan=null,pending=0,rev=0;
+const exp=new Set(),loading=new Set();
 const PAGE=48;
 
-// ---- código de lista (desde el enlace o guardado)
 const m=location.hash.match(/l=([\w-]{8,64})/);
 if(m){code=m[1];store("code",code);history.replaceState(null,"",location.pathname)}else code=load("code",null);
 
-// ---- utilidades de interfaz
+// ---------- interfaz básica
 let tt;const toast=t=>{const e=$("toast");e.textContent=t;e.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>e.classList.remove("on"),2200)};
-const openSheet=id=>{document.querySelectorAll(".sheet").forEach(s=>s.classList.toggle("open",s.id===id));$("ov").classList.add("open")};
-const closeSheets=()=>{document.querySelectorAll(".sheet").forEach(s=>s.classList.remove("open"));$("ov").classList.remove("open")};
+const openJoin=()=>{$("join").classList.add("open");$("ov").classList.add("open")};
+const closeJoin=()=>{$("join").classList.remove("open");$("ov").classList.remove("open")};
 function setSync(s){
-  const b=$("sync");b.className="sync "+(s==="local"?"":s);
+  $("sync").className="sync "+(s==="local"?"":s);
   $("syncT").textContent=s==="ok"?"Sincronizada":s==="off"?"Sin conexión":"Solo en este móvil";
 }
+function persist(){store("trips",trips);store("ti",tripItems);store("active",active);store("q",[...queue])}
 
-// ---- catálogo
-function lab(p){return p.b&&!norm(p.n).includes(norm(p.b))?`<span class="br">${esc(p.b)}</span>`:""}
-function img(p,cls){return p.i?`<img src="${esc(p.i)}" alt="" loading="lazy" decoding="async">`:`<span>🛒</span>`}
-function card(p){const on=!!items[p.id];
-  return `<button class="p${on?" on":""}" data-id="${p.id}" aria-pressed="${on}"><span class="tick">${on?"✓":""}</span><div class="tile">${img(p)}</div>${lab(p)}<b>${esc(p.n)}</b><small>${esc(p.f)}</small><span class="pr">${eur(p.p)}<em>${esc(p.u)}</em></span></button>`}
-function filtrar(){
+// ---------- modelo de listas
+const activeTrip=()=>trips.find(t=>t.id===active&&t.status==="open")||trips.find(t=>t.status==="open")||null;
+function snap(p){return {n:p.n,b:p.b,f:p.f,p:p.p,i:p.i,gn:CAT.grupos[p.g]||""}}
+function info(t,id){
+  const it=(tripItems[t.id]||{})[id],live=t.status==="open"?byId[id]:null,s=(it&&it.s)||{};
+  return live?{n:live.n,b:live.b,f:live.f,p:live.p,i:live.i,gn:CAT.grupos[live.g]||s.gn||""}
+             :{n:s.n||"Producto",b:s.b||"",f:s.f||"",p:s.p||0,i:s.i||"",gn:s.gn||""};
+}
+function total(t){return Object.keys(tripItems[t.id]||{}).reduce((a,id)=>a+tripItems[t.id][id].q*info(t,id).p,0)}
+function newTrip(){
+  const t={id:uid(),name:"Compra del "+fecha(Date.now()),status:"open",created_at:new Date().toISOString(),done_at:null};
+  trips.unshift(t);tripItems[t.id]={};active=t.id;rev++;push("t|"+t.id);return t;
+}
+function ensureActive(){return activeTrip()||newTrip()}
+function toggleProd(id,btn){
+  const p=byId[id];if(!p)return;
+  const t=ensureActive(),its=tripItems[t.id]||(tripItems[t.id]={});
+  if(its[id])delete its[id];else its[id]={q:1,d:false,s:snap(p)};
+  rev++;push("i|"+t.id+"|"+id);
+  if(btn){btn.classList.remove("pop");void btn.offsetWidth;btn.classList.add("pop")}
+  if(navigator.vibrate)navigator.vibrate(8);
+  persist();renderAll();
+}
+function finish(id){
+  const t=trips.find(x=>x.id===id);if(!t)return;
+  const its=tripItems[id]||{},left=Object.values(its).filter(x=>!x.d).length;
+  if(!confirm(left?`Quedan ${left} producto${left>1?"s":""} sin tachar. ¿Dar la compra por hecha igualmente?`:"¿Dar esta compra por hecha? Pasará a Listas."))return;
+  t.status="done";t.done_at=new Date().toISOString();if(active===id)active=null;
+  rev++;push("t|"+id);persist();renderAll();toast("Compra hecha ✓");
+}
+function reopen(id){const t=trips.find(x=>x.id===id);if(!t)return;t.status="open";t.done_at=null;active=id;rev++;push("t|"+id);persist();renderAll();go("list")}
+function useTrip(id){active=id;persist();go("list")}
+function delTrip(id){
+  if(!confirm("¿Borrar esta lista para siempre?"))return;
+  trips=trips.filter(t=>t.id!==id);delete tripItems[id];exp.delete(id);if(active===id)active=null;
+  rev++;push("t|"+id);persist();renderAll();
+}
+async function repeat(id){
+  await ensureItems([id]);
+  const src=tripItems[id]||{},t=newTrip(),dst=tripItems[t.id];
+  for(const pid in src){dst[pid]={q:src[pid].q,d:false,s:src[pid].s};push("i|"+t.id+"|"+pid)}
+  persist();renderAll();go("list");toast("Lista nueva creada");
+}
+
+// ---------- sincronización (Supabase)
+async function run(key){
+  const [k,a,b]=key.split("|");
+  if(k==="t"){
+    const t=trips.find(x=>x.id===a);
+    if(t)return sb.from("trips").upsert({list_id:code,id:t.id,name:t.name,status:t.status,created_at:t.created_at,done_at:t.done_at||null});
+    const r=await sb.from("trip_items").delete().eq("list_id",code).eq("trip_id",a);
+    if(r.error)return r;
+    return sb.from("trips").delete().eq("list_id",code).eq("id",a);
+  }
+  const it=(tripItems[a]||{})[b];
+  if(it)return sb.from("trip_items").upsert({list_id:code,trip_id:a,product_id:b,qty:it.q,done:it.d,snap:it.s||{},updated_at:new Date().toISOString()});
+  return sb.from("trip_items").delete().eq("list_id",code).eq("trip_id",a).eq("product_id",b);
+}
+async function push(key){
+  if(!sb||!code)return;
+  pending++;let err=null;
+  try{const r=await run(key);err=r&&r.error}catch(e){err=e}
+  pending--;
+  if(err){queue.add(key);persist();setSync("off");return}
+  queue.delete(key);persist();setSync("ok");
+  if(!pending)pull();
+}
+async function flush(){await Promise.all([...queue].map(push))}
+async function pull(){
+  if(!sb||!code||pending)return;
+  if(queue.size){await flush();return}
+  const r0=rev;
+  try{
+    const t=await sb.from("trips").select("id,name,status,created_at,done_at").eq("list_id",code).order("created_at",{ascending:false}).limit(80);
+    if(t.error)throw t.error;
+    const ts=t.data,ids=new Set(ts.map(x=>x.id));
+    const want=new Set(ts.filter(x=>x.status==="open").map(x=>x.id));
+    const ld=ts.find(x=>x.status==="done");if(ld)want.add(ld.id);
+    exp.forEach(id=>{if(ids.has(id))want.add(id)});
+    const keep=[...want];let rows=[];
+    if(keep.length){const it=await sb.from("trip_items").select("trip_id,product_id,qty,done,snap").eq("list_id",code).in("trip_id",keep);if(it.error)throw it.error;rows=it.data}
+    if(r0!==rev||pending||queue.size)return;
+    const ti={};for(const id in tripItems)if(ids.has(id))ti[id]=tripItems[id];
+    keep.forEach(id=>ti[id]={});
+    rows.forEach(r=>ti[r.trip_id][r.product_id]={q:r.qty,d:r.done,s:r.snap||{}});
+    trips=ts;tripItems=ti;persist();renderAll();setSync("ok");
+  }catch(e){setSync("off")}
+}
+async function ensureItems(ids){
+  if(!sb||!code)return;
+  const need=ids.filter(i=>!tripItems[i]&&!loading.has(i));if(!need.length)return;
+  need.forEach(i=>loading.add(i));
+  try{
+    const r=await sb.from("trip_items").select("trip_id,product_id,qty,done,snap").eq("list_id",code).in("trip_id",need);
+    if(r.error)throw r.error;
+    need.forEach(i=>{if(!tripItems[i])tripItems[i]={}});
+    r.data.forEach(x=>tripItems[x.trip_id][x.product_id]={q:x.qty,d:x.done,s:x.snap||{}});
+    persist();
+  }catch(e){}
+  need.forEach(i=>loading.delete(i));renderAll();
+}
+function startSync(){
+  if(!sb||!code){setSync("local");return}
+  pull();
+  if(chan)sb.removeChannel(chan);
+  chan=sb.channel("compra")
+    .on("postgres_changes",{event:"*",schema:"public",table:"trips"},()=>pull())
+    .on("postgres_changes",{event:"*",schema:"public",table:"trip_items"},()=>pull())
+    .subscribe(s=>{if(s==="SUBSCRIBED")setSync("ok");else if(["CHANNEL_ERROR","TIMED_OUT","CLOSED"].includes(s))setSync("off")});
+}
+const validCode=c=>/^[\w-]{8,64}$/.test(c);
+function useCode(c,keepLocal){
+  code=c;store("code",c);
+  if(keepLocal){trips.forEach(t=>{push("t|"+t.id);Object.keys(tripItems[t.id]||{}).forEach(p=>push("i|"+t.id+"|"+p))})}
+  else{trips=[];tripItems={};active=null;queue=new Set();persist();renderAll()}
+  startSync();toast("Lista conectada");
+}
+function showJoin(){
+  $("jbody").innerHTML=!sb?`<p>La sincronización aún no está configurada: faltan los datos de Supabase en config.js. Mientras tanto las listas se guardan solo en este móvil.</p>`
+  :code?`<p>Este es el código de vuestra lista. Quien lo introduzca verá las mismas listas al momento.</p><div class="code">${esc(code)}</div><button class="btn pri" id="jshare">Enviar enlace</button><p>¿Quieres cambiar a otra lista compartida?</p><div class="jrow"><input id="jcode" placeholder="Código de otra lista" autocapitalize="off" autocomplete="off" autocorrect="off"><button class="btn" id="jgo">Unirme</button></div>`
+  :`<p>Crea una lista compartida y mándale el código a tu pareja. Los dos veréis las mismas listas al momento.</p><button class="btn pri" id="jnew">Crear lista compartida</button><p>O únete a una que ya existe:</p><div class="jrow"><input id="jcode" placeholder="Código de la lista" autocapitalize="off" autocomplete="off" autocorrect="off"><button class="btn" id="jgo">Unirme</button></div>`;
+  openJoin();
+}
+async function share(){
+  if(!sb||!code){showJoin();return}
+  const url=location.origin+location.pathname+"#l="+code;
+  try{if(navigator.share)await navigator.share({title:"Lista de la compra",text:"Código de la lista: "+code,url});else{await navigator.clipboard.writeText(url);toast("Enlace copiado")}}catch(e){}
+}
+
+// ---------- productos
+const lab=p=>p.b&&!norm(p.n).includes(norm(p.b))?`<span class="br">${esc(p.b)}</span>`:"";
+const img=p=>p.i?`<img src="${esc(p.i)}" alt="" loading="lazy" decoding="async">`:`<span>🛒</span>`;
+function isIn(id){const t=activeTrip();return !!(t&&(tripItems[t.id]||{})[id])}
+function card(p){const on=isIn(p.id);
+  return `<button class="p${on?" on":""}" data-id="${p.id}" aria-pressed="${on}"><span class="tick">${on?"✓":""}</span><div class="im">${img(p)}</div>${lab(p)}<b>${esc(p.n)}</b><small>${esc(p.f)}</small><span class="pr">${eur(p.p)}<em>${esc(p.u)}</em></span></button>`}
+function renderCats(){
+  const c={};for(const p of CAT.productos)c[p.g]=(c[p.g]||0)+1;
+  $("cats").innerHTML=CAT.grupos.map((g,i)=>`<button class="cat" style="--h:${hue(g)}" data-g="${i}"><span class="ti">${emo(g)}</span><span><b>${esc(g)}</b><small>${(c[i]||0).toLocaleString("es-ES")} productos</small></span></button>`).join("");
+}
+function renderMinis(){
+  const ld=trips.find(t=>t.status==="done"),its=ld&&tripItems[ld.id];
+  const ids=its?Object.keys(its).filter(id=>byId[id]).slice(0,14):[];
+  $("lastWrap").hidden=!ids.length;
+  $("minis").innerHTML=ids.map(id=>{const p=byId[id],on=isIn(id);
+    return `<button class="mini${on?" on":""}" data-id="${id}" aria-pressed="${on}"><span class="tick">${on?"✓":""}</span><div class="im">${img(p)}</div><span class="nn">${esc(p.n)}</span></button>`}).join("");
+}
+function showMode(){
+  const r=grupo>=0||term.trim()||marca;
+  $("landing").hidden=!!r;$("results").hidden=!r;
+  if(!r)return;
+  const parts=[];
+  if(grupo>=0)parts.push(CAT.grupos[grupo]);
+  if(term.trim())parts.push(`«${term.trim()}»`);
+  if(marca)parts.push(marca);
+  $("rtitle").textContent=parts.join(" · ");
   const w=norm(term).split(/\s+/).filter(Boolean);
-  view=CAT.productos.filter(p=>(grupo<0||p.g===grupo)&&(!marca||p.b===marca)&&(!w.length||w.every(x=>norm(p.n+" "+p.b).includes(x))));
+  view=CAT.productos.filter(p=>(grupo<0||p.g===grupo)&&(!marca||p.b===marca)&&(!w.length||w.every(x=>p.k.includes(x))));
   shown=0;$("grid").innerHTML="";
-  if(!view.length){$("grid").innerHTML=`<div class="empty">No hay nada con ese nombre.<br>Prueba con otra palabra o quita filtros.</div>`;return}
+  if(!view.length){$("grid").innerHTML=`<div class="empty" style="grid-column:1/-1">No hay nada con ese nombre.<br>Prueba con otra palabra o quita filtros.</div>`;return}
   more();
 }
 function more(){
@@ -169,138 +392,121 @@ function more(){
   $("grid").insertAdjacentHTML("beforeend",part.map(card).join(""));
 }
 new IntersectionObserver(es=>{if(es[0].isIntersecting)more()},{rootMargin:"600px"}).observe($("more"));
-function syncCards(){document.querySelectorAll(".p").forEach(b=>{const on=!!items[b.dataset.id];b.classList.toggle("on",on);b.setAttribute("aria-pressed",on);b.querySelector(".tick").textContent=on?"✓":""})}
-
-// ---- lista
-function info(id){return byId[id]||{n:items[id].n||"Producto que ya no está en el catálogo",b:"",f:"",p:0,i:"",g:-1}}
-function totals(){
-  let n=0,t=0;
-  for(const id in items){n+=items[id].q;t+=items[id].q*info(id).p}
-  $("cnt").textContent=n;$("tot").textContent=eur(t);
-  $("tot2").innerHTML=`<small>Total estimado</small>${eur(t)}`;
+function syncCards(){document.querySelectorAll("[data-id]").forEach(b=>{const on=isIn(b.dataset.id);b.classList.toggle("on",on);b.setAttribute("aria-pressed",on);const k=b.querySelector(".tick");if(k)k.textContent=on?"✓":""})}
+function renderAdding(){
+  const t=activeTrip(),n=t?Object.keys(tripItems[t.id]||{}).length:0;
+  $("adding").innerHTML=t?`<span>🧾 Añadiendo a <b>${esc(t.name)}</b></span><span class="c">${n}</span>`:`<span>🧾 Se creará una lista nueva al añadir</span>`;
 }
+
+// ---------- lista actual (modo súper)
+function rowHtml(t,id,it){
+  const i=info(t,id);
+  return `<div class="row${it.d?" done":""}" data-p="${id}" role="button" tabindex="0" aria-pressed="${!!it.d}"><span class="ck">${it.d?"✓":""}</span><div class="th">${img(i)}</div><div class="nm"><b>${esc(i.n)}</b><small>${esc(i.f)}${i.p?(i.f?" · ":"")+eur(i.p):""}</small></div><div class="qty"><button data-m="${id}" aria-label="Menos">−</button><span>${it.q}</span><button data-a="${id}" aria-label="Más">+</button></div></div>`;
+}
+const empty=(big,t,p,acts)=>`<div class="empty"><div class="big">${big}</div><b>${t}</b><p>${p}</p><div class="acts">${acts}</div></div>`;
 function renderList(){
-  const ids=Object.keys(items);
-  if(!ids.length){$("list").innerHTML=`<div class="empty">Tu lista está vacía.<br>Toca un producto para añadirlo.</div>`;return}
-  const gs=[...new Set(ids.map(id=>info(id).g))].sort((a,b)=>a-b);
-  $("list").innerHTML=gs.map(g=>{
-    const r=ids.filter(id=>info(id).g===g);
-    return `<div class="cat">${esc(g<0?"Otros":CAT.grupos[g])}</div>`+r.map(id=>{const p=info(id),s=items[id];
-      return `<div class="row${s.d?" done":""}"><button class="ck" data-ck="${id}" aria-label="Marcar ${esc(p.n)}">${s.d?"✓":""}</button><div class="th">${img(p)}</div><div class="nm">${esc(p.n)}<small>${p.p?eur(p.p)+" · ":""}${esc(p.f)}</small></div><div class="qty"><button data-m="${id}" aria-label="Menos">−</button><span>${s.q}</span><button data-a="${id}" aria-label="Más">+</button></div></div>`}).join("");
+  const t=activeTrip();
+  if(!t){
+    $("listTop").innerHTML="";$("cta").innerHTML="";
+    $("listBody").innerHTML=empty("🧺","No hay ninguna lista en curso","Añade productos y se creará sola, o empieza una vacía.",`<button class="btn pri" data-go="prod">Añadir productos</button><button class="btn" data-newtrip="1">Nueva lista</button>`);
+    return;
+  }
+  const its=tripItems[t.id]||{},ids=Object.keys(its),done=ids.filter(i=>its[i].d).length;
+  $("listTop").innerHTML=`<div class="prog"><div class="pt"><b>${done} de ${ids.length}</b><span>en el carro</span><em>${eur(total(t))}</em></div><div class="bar"><i style="width:${ids.length?done/ids.length*100:0}%"></i></div></div>`;
+  if(!ids.length){
+    $("cta").innerHTML="";
+    $("listBody").innerHTML=empty("🛒","Esta lista está vacía","Toca los productos que necesitas y aparecerán aquí.",`<button class="btn pri" data-go="prod">Añadir productos</button>`);
+    return;
+  }
+  const gs={};ids.forEach(id=>{(gs[info(t,id).gn||"Otros"]||(gs[info(t,id).gn||"Otros"]=[])).push(id)});
+  const order=Object.keys(gs).sort((a,b)=>{const x=CAT.grupos.indexOf(a),y=CAT.grupos.indexOf(b);return (x<0?99:x)-(y<0?99:y)||a.localeCompare(b,"es")});
+  $("listBody").innerHTML=order.map(g=>`<div class="gh"><span>${emo(g)}</span><span>${esc(g)}</span><em>${gs[g].length}</em></div>`+
+    gs[g].sort((a,b)=>(its[a].d?1:0)-(its[b].d?1:0)||info(t,a).n.localeCompare(info(t,b).n,"es")).map(id=>rowHtml(t,id,its[id])).join("")).join("");
+  $("cta").innerHTML=`<button class="btn pri big" data-finish="${t.id}">Compra hecha ✓</button>`;
+}
+
+// ---------- listas anteriores
+function renderTrips(){
+  if(!trips.length){$("trips").innerHTML=empty("🗓️","Aún no hay listas","Cuando hagas tu primera compra aparecerá aquí.","");return}
+  $("trips").innerHTML=trips.map(t=>{
+    const its=tripItems[t.id],ids=its?Object.keys(its):[],open=exp.has(t.id);
+    const meta=its?`${t.status==="done"&&t.done_at?"Hecha el "+fecha(t.done_at)+" · ":""}${ids.length} producto${ids.length===1?"":"s"} · ${eur(total(t))}`:"Toca para ver";
+    let body="";
+    if(open){
+      body=`<div class="tbody">`+(its?ids.map(id=>{const i=info(t,id),it=its[id];return `<div class="ir"><span class="y">${it.d?"✓":""}</span><span class="n">${esc(i.n)}</span><span class="q">×${it.q}</span><span class="pz">${eur(i.p*it.q)}</span></div>`}).join(""):`<p>Cargando…</p>`)+
+        `<div class="tacts">`+(t.status==="open"?`<button class="btn pri" data-use="${t.id}">Abrir esta lista</button>`:`<button class="btn pri" data-repeat="${t.id}">Repetir esta compra</button><button class="btn" data-reopen="${t.id}">Reabrir</button>`)+`<button class="btn ghost" data-del="${t.id}">Borrar</button></div></div>`;
+    }
+    return `<div class="trip"><button class="trh" data-exp="${t.id}" aria-expanded="${open}"><span><b>${esc(t.name)}</b><small>${meta}</small></span><span class="st ${t.status}">${t.status==="open"?"En curso":"Hecha"}</span></button>${body}</div>`;
   }).join("");
 }
-function refresh(){totals();renderList();store("items",items)}
 
-// ---- sincronización (Supabase)
-async function push(id){
-  if(!sb||!code)return;
-  pending++;let err=null;
-  try{
-    const it=items[id];
-    const r=it?await sb.from("list_items").upsert({list_id:code,product_id:id,qty:it.q,done:it.d,name:it.n||null,updated_at:new Date().toISOString()})
-              :await sb.from("list_items").delete().eq("list_id",code).eq("product_id",id);
-    err=r.error;
-  }catch(e){err=e}
-  pending--;
-  if(err){failed.add(id);setSync("off");return}
-  setSync("ok");
-  if(!pending)pull();
+// ---------- navegación y renderizado
+function renderHead(){
+  if(tab==="prod"){$("title").textContent="Compra";$("sub").textContent=CAT.productos.length?`${CAT.actualizado?"Catálogo del "+fecha(CAT.actualizado+"T12:00:00")+" · ":""}Mercadona Sevilla · ${CAT.productos.length.toLocaleString("es-ES")} productos`:"Cargando catálogo…"}
+  else if(tab==="list"){const t=activeTrip();$("title").textContent="Lista";$("sub").textContent=t?t.name+" · toca un producto para tacharlo":"Sin lista en curso"}
+  else{$("title").textContent="Listas";$("sub").textContent="Todas tus compras, una lista por visita"}
 }
-async function pull(){
-  if(!sb||!code||pending)return;
-  if(failed.size){const ids=[...failed];failed.clear();await Promise.all(ids.map(push));return}
-  try{
-    const {data,error}=await sb.from("list_items").select("product_id,qty,done,name").eq("list_id",code);
-    if(error)throw error;
-    const n={};for(const r of data)n[r.product_id]={q:r.qty,d:r.done,n:r.name||""};
-    items=n;refresh();syncCards();setSync("ok");
-  }catch(e){setSync("off")}
+function renderAll(){
+  renderHead();renderAdding();renderMinis();renderList();renderTrips();syncCards();
+  const t=activeTrip(),n=t?Object.keys(tripItems[t.id]||{}).length:0;
+  $("badge").hidden=!n;$("badge").textContent=n;
 }
-function startSync(){
-  if(!sb||!code){setSync("local");return}
-  pull();
-  if(chan)sb.removeChannel(chan);
-  chan=sb.channel("lista").on("postgres_changes",{event:"*",schema:"public",table:"list_items"},()=>pull())
-    .subscribe(s=>{if(s==="SUBSCRIBED")setSync("ok");else if(["CHANNEL_ERROR","TIMED_OUT","CLOSED"].includes(s))setSync("off")});
+function go(n){
+  tab=n;
+  ["prod","list","hist"].forEach(x=>{$("v-"+x).hidden=x!==n;document.querySelector(`.tabs [data-tab="${x}"]`).setAttribute("aria-selected",x===n)});
+  scrollTo(0,0);renderAll();
+  if(n==="hist")ensureItems(trips.slice(0,12).map(t=>t.id));
 }
-const validCode=c=>/^[\w-]{8,64}$/.test(c);
-function useCode(c){
-  code=c;store("code",c);items={};refresh();syncCards();startSync();closeSheets();
-  toast("Lista conectada");
-}
-function showJoin(){
-  const hay=!!sb;
-  $("jbody").innerHTML=!hay?`<p>La sincronización aún no está configurada: faltan los datos de Supabase en config.js. Mientras tanto la lista se guarda solo en este móvil.</p>`
-  :code?`<p>Este es el código de vuestra lista. Quien lo introduzca verá los mismos productos al momento.</p><div class="code">${esc(code)}</div><button class="btn pri" id="jshare">Enviar enlace</button><p>¿Quieres cambiar a otra lista?</p><div class="jrow"><input id="jcode" placeholder="Código de otra lista" autocapitalize="off" autocomplete="off" autocorrect="off"><button class="btn" id="jgo">Unirme</button></div>`
-  :`<p>Crea una lista y mándale el código a tu pareja. Los dos veréis los mismos productos al momento.</p><button class="btn pri" id="jnew">Crear lista nueva</button><p>O únete a una que ya existe:</p><div class="jrow"><input id="jcode" placeholder="Código de la lista" autocapitalize="off" autocomplete="off" autocorrect="off"><button class="btn" id="jgo">Unirme</button></div>`;
-  openSheet("join");
-}
+
+// ---------- eventos
+document.addEventListener("click",e=>{
+  const T=e.target;
+  let b;
+  if(b=T.closest("[data-id]"))return toggleProd(b.dataset.id,b);
+  if(b=T.closest("[data-tab]"))return go(b.dataset.tab);
+  if(b=T.closest("[data-g]")){grupo=+b.dataset.g;showMode();return scrollTo(0,0)}
+  if(b=T.closest("[data-m]")){const t=activeTrip(),its=t&&tripItems[t.id],id=b.dataset.m;if(!its||!its[id])return;if(--its[id].q<1)delete its[id];rev++;push("i|"+t.id+"|"+id);persist();return renderAll()}
+  if(b=T.closest("[data-a]")){const t=activeTrip(),its=t&&tripItems[t.id],id=b.dataset.a;if(!its||!its[id])return;its[id].q++;rev++;push("i|"+t.id+"|"+id);persist();return renderAll()}
+  if(b=T.closest("[data-p]")){const t=activeTrip(),its=t&&tripItems[t.id],id=b.dataset.p;if(!its||!its[id])return;its[id].d=!its[id].d;rev++;push("i|"+t.id+"|"+id);persist();return renderAll()}
+  if(b=T.closest("[data-finish]"))return finish(b.dataset.finish);
+  if(b=T.closest("[data-go]"))return go(b.dataset.go);
+  if(b=T.closest("[data-newtrip]")){newTrip();persist();renderAll();return go("prod")}
+  if(b=T.closest("[data-exp]")){const id=b.dataset.exp;exp.has(id)?exp.delete(id):exp.add(id);renderTrips();if(exp.has(id))ensureItems([id]);return}
+  if(b=T.closest("[data-use]"))return useTrip(b.dataset.use);
+  if(b=T.closest("[data-repeat]"))return repeat(b.dataset.repeat);
+  if(b=T.closest("[data-reopen]"))return reopen(b.dataset.reopen);
+  if(b=T.closest("[data-del]"))return delTrip(b.dataset.del);
+});
+document.addEventListener("keydown",e=>{if((e.key==="Enter"||e.key===" ")&&e.target.matches&&e.target.matches(".row")){e.preventDefault();e.target.click()}});
+$("back").onclick=()=>{grupo=-1;marca="";term="";$("q").value="";$("marca").value="";showMode();scrollTo(0,0)};
+$("q").addEventListener("input",e=>{term=e.target.value;showMode()});
+$("marca").addEventListener("change",e=>{marca=e.target.value;showMode()});
+$("adding").onclick=()=>go("list");
+$("newTrip").onclick=()=>{newTrip();persist();renderAll();go("prod");toast("Lista nueva creada")};
+$("sync").onclick=showJoin;
+$("jx").onclick=closeJoin;$("ov").onclick=closeJoin;
 $("jbody").addEventListener("click",e=>{
   const id=e.target.id;
-  if(id==="jnew"){const a=new Uint8Array(12);crypto.getRandomValues(a);const c=[...a].map(x=>"abcdefghjkmnpqrstuvwxyz23456789"[x%31]).join("");
-    // los elementos de la lista local pasan a la nueva lista compartida
-    const prev=items;useCode(c);items=prev;refresh();Object.keys(items).forEach(push);showJoin()}
-  if(id==="jgo"){const c=$("jcode").value.trim();if(!validCode(c))return toast("Código no válido");useCode(c)}
+  if(id==="jnew"){const c=uid()+uid();useCode(c,true);showJoin()}
+  if(id==="jgo"){const c=$("jcode").value.trim();if(!validCode(c))return toast("Código no válido");useCode(c,false);closeJoin()}
   if(id==="jshare")share();
 });
-async function share(){
-  if(!sb||!code){showJoin();return}
-  const url=location.origin+location.pathname+"#l="+code;
-  try{
-    if(navigator.share)await navigator.share({title:"Lista de la compra",text:"Código de la lista: "+code,url});
-    else{await navigator.clipboard.writeText(url);toast("Enlace copiado")}
-  }catch(e){}
-}
-
-// ---- eventos
-$("grid").addEventListener("click",e=>{
-  const b=e.target.closest(".p");if(!b)return;
-  const id=b.dataset.id;
-  if(items[id])delete items[id];else items[id]={q:1,d:false,n:byId[id].n};
-  const on=!!items[id];
-  b.classList.toggle("on",on);b.setAttribute("aria-pressed",on);b.querySelector(".tick").textContent=on?"✓":"";
-  b.classList.remove("pop");void b.offsetWidth;b.classList.add("pop");
-  if(navigator.vibrate)navigator.vibrate(8);
-  refresh();push(id);
-});
-$("list").addEventListener("click",e=>{
-  const t=e.target.closest("button");if(!t)return;const d=t.dataset;
-  const id=d.ck||d.a||d.m;if(!id)return;
-  if(d.ck)items[id].d=!items[id].d;
-  else if(d.a)items[id].q++;
-  else if(--items[id].q<1)delete items[id];
-  refresh();syncCards();push(id);
-});
-$("clr").onclick=()=>{const ids=Object.keys(items).filter(id=>items[id].d);ids.forEach(id=>delete items[id]);refresh();syncCards();ids.forEach(push)};
-$("chips").addEventListener("click",e=>{const b=e.target.closest(".chip");if(!b)return;grupo=+b.dataset.g;chips();filtrar()});
-$("q").addEventListener("input",e=>{term=e.target.value;filtrar()});
-$("marca").addEventListener("change",e=>{marca=e.target.value;filtrar()});
-$("bar").onclick=()=>openSheet("sheet");
-$("ov").onclick=closeSheets;
-document.querySelectorAll("[data-close]").forEach(b=>b.onclick=closeSheets);
-$("share").onclick=share;
-$("sync").onclick=showJoin;
 addEventListener("online",pull);
 document.addEventListener("visibilitychange",()=>{if(!document.hidden)pull()});
 
-function chips(){
-  $("chips").innerHTML=["Todo",...CAT.grupos].map((c,i)=>`<button class="chip" data-g="${i-1}" aria-pressed="${grupo===i-1}">${esc(c)}</button>`).join("");
-}
-
-// ---- arranque
+// ---------- arranque
 if(CFG.SUPABASE_URL&&CFG.SUPABASE_KEY&&window.supabase){sb=supabase.createClient(CFG.SUPABASE_URL,CFG.SUPABASE_KEY)}
 if("serviceWorker"in navigator)navigator.serviceWorker.register("sw.js").catch(()=>{});
-refresh();
+setSync(sb&&code?"off":"local");
+renderAll();
 fetch("catalogo.json").then(r=>{if(!r.ok)throw 0;return r.json()}).then(d=>{
-  CAT=d;for(const p of d.productos)byId[p.id]=p;
+  CAT=d;for(const p of d.productos){byId[p.id]=p;p.k=norm(p.n+" "+p.b)}
   const cuenta={};for(const p of d.productos)if(p.b)cuenta[p.b]=(cuenta[p.b]||0)+1;
   const ms=Object.keys(cuenta).sort((a,b)=>(b==="Hacendado")-(a==="Hacendado")||cuenta[b]-cuenta[a]||a.localeCompare(b,"es"));
-  $("marca").innerHTML=`<option value="">Todas las marcas</option>`+ms.map(x=>`<option value="${esc(x)}">${esc(x)} (${cuenta[x]})</option>`).join("");
-  const f=d.actualizado?new Date(d.actualizado+"T12:00:00").toLocaleDateString("es-ES",{day:"numeric",month:"short"}):"";
-  $("sub").textContent=`${f?"Catálogo del "+f+" · ":""}Mercadona Sevilla · ${d.productos.length.toLocaleString("es-ES")} productos`;
-  chips();filtrar();refresh();syncCards();startSync();
+  $("marca").innerHTML=`<option value="">Marcas</option>`+ms.map(x=>`<option value="${esc(x)}">${esc(x)} (${cuenta[x]})</option>`).join("");
+  renderCats();showMode();renderAll();startSync();
   if(!code&&sb&&!load("sinLista",false)){store("sinLista",true);showJoin()}
-}).catch(()=>{$("sub").textContent="No se pudo cargar el catálogo";$("grid").innerHTML=`<div class="empty">Falta catalogo.json.<br>Lanza la acción "Actualizar catálogo" en GitHub.</div>`});
+}).catch(()=>{$("sub").textContent="No se pudo cargar el catálogo";$("landing").innerHTML=`<div class="empty">Falta catalogo.json.<br>Lanza la acción "Actualizar catálogo" en GitHub.</div>`});
 </script>
 </body>
 </html>
