@@ -6,16 +6,16 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Compra">
-<meta name="theme-color" content="#F3F5F1">
+<meta name="theme-color" content="#FFFFFF">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <title>Compra</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500..800&family=DM+Sans:wght@400..700&display=swap" rel="stylesheet">
+
 <style>
-:root{--bg:#F3F5F1;--card:#FFFFFF;--ink:#15201A;--mute:#66726B;--bd:#E1E6DF;--line:#E8ECE6;--acc:#178A4C;--acc-soft:#E2F3E8;--acc-ink:#0F6A38;--onacc:#FFFFFF;--sel:#EDF7F0;--tom:#D6402B;--ontom:#FFFFFF;--good:#1F8A4F;--ongood:#FFFFFF;--glass:rgba(255,255,255,.82);--sh:0 1px 2px rgba(21,32,26,.05),0 8px 24px rgba(21,32,26,.06);--tile:#F7F8F5;--ring:rgba(23,138,76,.30);--tabsel:#15201A;--tabselfg:#FFFFFF;--sun:var(--acc-soft);--mint:var(--acc);--lime:var(--acc);--shc:transparent;--tbb:var(--glass);--tbf:var(--mute);--bw:1px;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0E1511;--card:#18211C;--ink:#E9F0EB;--mute:#8FA096;--bd:#26332B;--line:#212D26;--acc:#3FBF7A;--acc-soft:#1B3A2A;--acc-ink:#7BDDA6;--onacc:#06150C;--sel:#1A2E22;--tom:#FF7B66;--ontom:#2B0A04;--good:#4CD08A;--ongood:#06150C;--glass:rgba(24,33,28,.82);--sh:0 1px 2px rgba(0,0,0,.35);--tile:#F2F4F1;--ring:rgba(63,191,122,.25);--tabsel:#E9F0EB;--tabselfg:#0E1511}}
-:root[data-theme="dark"]{--bg:#0E1511;--card:#18211C;--ink:#E9F0EB;--mute:#8FA096;--bd:#26332B;--line:#212D26;--acc:#3FBF7A;--acc-soft:#1B3A2A;--acc-ink:#7BDDA6;--onacc:#06150C;--sel:#1A2E22;--tom:#FF7B66;--ontom:#2B0A04;--good:#4CD08A;--ongood:#06150C;--glass:rgba(24,33,28,.82);--sh:0 1px 2px rgba(0,0,0,.35);--tile:#F2F4F1;--ring:rgba(63,191,122,.25);--tabsel:#E9F0EB;--tabselfg:#0E1511}
+:root{--bg:#FFFFFF;--card:#FFFFFF;--ink:#111111;--mute:#707070;--bd:#DDDDDD;--line:#ECECEC;--acc:#0E8F4A;--acc-soft:#E3F4E8;--acc-ink:#0A6B37;--onacc:#FFFFFF;--sel:#F6F6F6;--tom:#E2342B;--ontom:#FFFFFF;--good:#0E8F4A;--ongood:#FFFFFF;--glass:rgba(255,255,255,.95);--sh:none;--tile:#F1F5EE;--ring:rgba(0,0,0,.2);--tabsel:#0E8F4A;--tabselfg:#FFFFFF;--sun:var(--acc-soft);--mint:var(--acc);--lime:var(--acc);--shc:transparent;--tbb:var(--glass);--tbf:var(--mute);--bw:1px;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0B0B0B;--card:#0B0B0B;--ink:#F2F2F2;--mute:#9A9A9A;--bd:#2B2B2B;--line:#1E1E1E;--acc:#3FD07F;--acc-soft:#14261B;--acc-ink:#3FD07F;--onacc:#0B0B0B;--sel:#151515;--tom:#FF6B6B;--ontom:#1A0000;--good:#6FD39A;--ongood:#04140A;--glass:rgba(11,11,11,.95);--sh:none;--tile:#17211B;--ring:rgba(255,255,255,.2);--tabsel:#3FD07F;--tabselfg:#04140A}}
+:root[data-theme="dark"]{--bg:#0B0B0B;--card:#0B0B0B;--ink:#F2F2F2;--mute:#9A9A9A;--bd:#2B2B2B;--line:#1E1E1E;--acc:#3FD07F;--acc-soft:#14261B;--acc-ink:#3FD07F;--onacc:#0B0B0B;--sel:#151515;--tom:#FF6B6B;--ontom:#1A0000;--good:#6FD39A;--ongood:#04140A;--glass:rgba(11,11,11,.95);--sh:none;--tile:#17211B;--ring:rgba(255,255,255,.2);--tabsel:#3FD07F;--tabselfg:#04140A}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 [hidden]{display:none!important}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
@@ -259,6 +259,129 @@ h1{font-weight:700;font-size:38px;letter-spacing:-.035em;line-height:1}
 .toast{border:0;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.2);background:var(--ink);color:var(--bg)}
 .toast button{background:var(--acc);color:var(--onacc)}
 @keyframes stamp{0%{transform:scale(.4);opacity:0}60%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}
+/* ===== barra inferior fija y botón al final de la lista ===== */
+.wrap{padding-bottom:120px}
+.tabs{left:0;right:0;bottom:0;transform:none;width:100%;border:0;border-top:1px solid var(--bd);border-radius:0;background:var(--card);-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:none;padding:6px 10px calc(6px + env(safe-area-inset-bottom,0px));transition:transform .25s ease}
+.tabs.hide{transform:translateY(105%)}
+.tabs button{border-radius:14px}
+.cta{position:static;bottom:auto;padding-top:22px;margin-bottom:4px}
+.toast{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+
+*,*::before,*::after{border-radius:0!important;box-shadow:none!important;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif!important}
+h1{font-weight:400;font-size:24px;letter-spacing:.14em;text-transform:uppercase;line-height:1.1}
+.sub{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+.sync{border:0;border-bottom:1px solid var(--bd);background:transparent;padding:4px 0;font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+.search{padding:14px 0 10px;gap:18px}
+.search input,.search select,.addc input,.addc select,.jrow input,.jb input,#noteIn{border:0;border-bottom:1px solid var(--ink);background:transparent;padding:12px 0;font-size:15px}
+.search input:focus,.addc input:focus,.jb input:focus,#noteIn:focus{border-bottom-width:2px}
+.adding{background:var(--acc-soft);font-size:12px;letter-spacing:.06em;text-transform:uppercase;font-weight:500}
+.adding .c{background:var(--ink);color:var(--bg);padding:1px 8px}
+.h2{display:block;font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;margin:34px 0 14px;border-bottom:1px solid var(--ink);padding-bottom:10px}
+.cats{gap:2px}
+.cat{background:var(--tile)!important;border:0;aspect-ratio:1.5;padding:14px;color:#111}
+.cat .ti{filter:grayscale(1);font-size:30px}
+.cat b{font-size:13px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:#111}
+.cat small{font-size:11px;color:#555}
+.rhead h2{font-size:15px;font-weight:500;letter-spacing:.1em;text-transform:uppercase}
+.back{border:1px solid var(--ink);background:transparent}
+.grid{gap:24px 10px}
+.p{border:0;background:transparent;padding:0;gap:3px}
+.im{height:190px;background:var(--tile);border:0}
+.im img{mix-blend-mode:multiply}
+.p b{font-size:13px;font-weight:500;line-height:1.25;margin-top:8px}
+.p small{font-size:11px}
+.pr strong{font-size:13px;font-weight:500}
+.br{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);font-weight:500}
+.dl{font-size:10px}
+.tick{top:8px;right:8px;width:24px;height:24px;border:1px solid var(--ink);background:var(--bg);color:var(--bg)}
+.on{background:transparent!important;border-color:transparent!important}
+.p.on .im,.mini.on .im{outline:2px solid var(--ink);outline-offset:-2px}
+.on .tick{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.mini{border:0;background:transparent;width:96px;padding:0}
+.mini .im{height:96px}
+.mini .xn{background:var(--ink);color:var(--bg)}
+.btn{border:1px solid var(--ink);background:transparent;font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:500;padding:13px 16px}
+.btn.pri{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.btn.ghost{border-color:transparent;color:var(--mute)}
+.btn.big{font-size:13px;padding:18px}
+.tools .btn{font-size:11px}
+.prog{border:0;padding:0 0 14px;border-bottom:1px solid var(--ink);background:transparent}
+.pt b{font-weight:400;font-size:26px}
+.pt em{background:transparent;color:var(--ink);padding:0;font-weight:500}
+.trk{margin:14px 0 0}
+.tkin{height:2px;background:var(--line)}
+.tkin i{background:var(--ink)}
+.cart{display:none}
+.gh{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;border-bottom:1px solid var(--bd);padding-bottom:8px;margin:28px 0 8px}
+.gh span:first-child{filter:grayscale(1);font-size:16px}
+.gh em{background:transparent;color:var(--mute)}
+.row{border:0;border-bottom:1px solid var(--line);padding:12px 0;min-height:72px;background:transparent}
+.row.done{background:transparent}
+.ck{border:1px solid var(--ink);background:transparent}
+.row.done .ck{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.th{background:var(--tile)}
+.th img{mix-blend-mode:multiply}
+.nm b{font-weight:500;font-size:14px}
+.qty button{border:1px solid var(--ink);background:transparent}
+.nbtn{border:0;border-bottom:1px dashed var(--mute);padding:0;background:transparent}
+.nbtn.has{background:transparent;color:var(--ink);border-bottom:1px solid var(--ink)}
+.trip{border:0;border-bottom:1px solid var(--bd);background:transparent;margin-top:0}
+.trh{padding:16px 0}
+.trh b{font-weight:500;font-size:14px;letter-spacing:.04em;text-transform:uppercase}
+.st{background:transparent!important;border:1px solid var(--ink);color:var(--ink)!important;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px}
+.stat{border:0;background:var(--tile)!important;color:#111}
+.stat small{color:#555}
+.stat.wide{background:var(--ink)!important;color:var(--bg)}
+.stat.wide small{color:var(--bg)}
+.stat b{font-weight:400;font-size:30px}
+.chart{border:0;border-top:1px solid var(--ink);padding:16px 0 8px;background:transparent}
+.bars .b i{background:color-mix(in srgb,var(--ink) 22%,var(--bg))!important}
+.bars .b:last-child i{background:var(--ink)!important}
+.top{border:0;border-bottom:1px solid var(--line);background:transparent;padding:12px 0}
+.top em{background:transparent;color:var(--mute)}
+.tabs{background:var(--bg);border-top:1px solid var(--ink);padding-top:0}
+.tabs button{font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;border-top:2px solid transparent;margin-top:-1px;padding-top:10px}
+.tabs button[aria-selected="true"]{background:transparent;color:var(--ink);border-top-color:var(--ink)}
+.tabs svg{stroke-width:1.5}
+.badge{background:var(--ink);color:var(--bg);top:6px}
+.sheet{border-top:1px solid var(--ink)}
+.x{border:1px solid var(--ink);background:transparent}
+.toast{background:var(--ink);color:var(--bg)}
+.toast button{background:var(--bg);color:var(--ink)}
+.jb .code{background:var(--tile);color:#111}
+.empty b{font-weight:500;text-transform:uppercase;letter-spacing:.1em;font-size:14px}
+
+/* mercado: mismo esqueleto Zara, con color de súper */
+.cat{background:color-mix(in srgb,var(--c) 38%,#fff)!important;aspect-ratio:1.25;justify-content:space-between}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .cat{background:color-mix(in srgb,var(--c) 45%,#0B0B0B)!important}}
+:root[data-theme="dark"] .cat{background:color-mix(in srgb,var(--c) 45%,#0B0B0B)!important}
+.cat .ti{filter:none;font-size:38px}
+.cat b{font-size:14px;font-weight:700}
+.h2{border-bottom:3px solid var(--acc)}
+h1{color:var(--ink)}h1::after{content:"";display:block;width:44px;height:5px;background:var(--acc);margin-top:8px}
+.im{background:color-mix(in srgb,var(--acc) 7%,var(--bg))}
+.pr strong{font-size:17px;font-weight:800}
+.pr{align-items:baseline}
+.p.on .im,.mini.on .im{outline:3px solid var(--acc)}
+.on .tick{background:var(--acc);border-color:var(--acc);color:#fff}
+.tick{border-color:var(--acc)}
+.btn.pri,.addc .btn{background:var(--acc);border-color:var(--acc);color:#fff}
+.adding{background:var(--acc);color:#fff}
+.adding .c{background:#fff;color:var(--acc)}
+.pt em{color:var(--acc)}
+.tkin{height:6px}.tkin i{background:var(--acc)}
+.stat.wide{background:var(--acc)!important;color:#fff}
+.stat.wide small{color:#fff}
+.stat{background:var(--acc-soft)!important}
+.bars .b:last-child i{background:var(--acc)!important}
+.gh{border-bottom:2px solid var(--acc)}
+.row.done .ck{background:var(--acc);border-color:var(--acc)}
+.tabs{border-top:1px solid var(--bd)}
+.tabs button[aria-selected="true"]{color:var(--acc);border-top-color:var(--acc);border-top-width:3px}
+.badge{background:var(--tom);color:#fff}
+.st{border-color:var(--acc);color:var(--acc)!important}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .im,:root:not([data-theme="light"]) .th{background:#fff}:root:not([data-theme="light"]) .im img,:root:not([data-theme="light"]) .th img{mix-blend-mode:normal}}
+:root[data-theme="dark"] .im,:root[data-theme="dark"] .th{background:#fff}:root[data-theme="dark"] .im img,:root[data-theme="dark"] .th img{mix-blend-mode:normal}
 </style>
 </head>
 <body>
@@ -337,7 +460,7 @@ const load=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k));return v??d}c
 const store=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
 const uid=()=>{const a=new Uint8Array(8);crypto.getRandomValues(a);return [...a].map(x=>"abcdefghjkmnpqrstuvwxyz23456789"[x%31]).join("")};
 const fecha=d=>new Date(d).toLocaleDateString("es-ES",{day:"numeric",month:"short"});
-const PAL=["#6FBF9A", "#F2C46D", "#F08C7C", "#9FA8F2", "#7DB8E8", "#E89CC4", "#B5D56F"];
+const PAL=["#2FA866", "#F4B63F", "#EF6A4C", "#4C9BE8", "#E9779F", "#8BC34A", "#F28C28"];
 const EMO=[[/cabello|pelo/,"💇"],[/aceite|especia|salsa/,"🫒"],[/agua|refresc/,"🥤"],[/aperitiv/,"🥨"],[/arroz|legumbre|pasta/,"🍝"],[/azucar|caramelo|chocolate/,"🍫"],[/bebe/,"🍼"],[/bodega|vino|cerveza/,"🍷"],[/cacao|cafe|infusion/,"☕"],[/carne/,"🥩"],[/cereal|galleta/,"🥣"],[/charcuter|queso/,"🧀"],[/congelad/,"🧊"],[/conserva|caldo/,"🥫"],[/facial|corporal|higiene/,"🧴"],[/fitoterap|parafarm/,"💊"],[/fruta|verdura/,"🥦"],[/huevo|leche|mantequilla/,"🥛"],[/limpieza|hogar/,"🧽"],[/maquillaje/,"💄"],[/marisco|pescado/,"🐟"],[/mascota/,"🐶"],[/panader|pasteler/,"🥐"],[/pizza|plato/,"🍕"],[/postre|yogur/,"🍮"],[/zumo/,"🧃"],[/otros/,"✍️"]];
 const emo=n=>{const k=norm(n);for(const [r,e] of EMO)if(r.test(k))return e;return "🛒"};
 
@@ -786,6 +909,11 @@ fetch("catalogo.json").then(r=>{if(!r.ok)throw 0;return r.json()}).then(d=>{
   renderCats();showMode();renderAll();startSync();
   if(!code&&sb&&!load("sinLista",false)){store("sinLista",true);showJoin()}
 }).catch(()=>{$("sub").textContent="Sin catálogo";$("landing").innerHTML=`<div class="empty">Falta catalogo.json.<br>Lanza la acción "Actualizar catálogo" en GitHub.</div>`});
+
+// barra inferior: se esconde al bajar y vuelve al subir o al llegar al final
+(function(){let ly=0;const tb=document.querySelector(".tabs");
+addEventListener("scroll",()=>{const y=scrollY,bottom=innerHeight+y>=document.documentElement.scrollHeight-60;
+if(y<60||bottom||y<ly-4)tb.classList.remove("hide");else if(y>ly+4)tb.classList.add("hide");ly=y},{passive:true})})();
 </script>
 </body>
 </html>
